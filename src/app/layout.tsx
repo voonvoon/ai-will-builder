@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
-import {Inter} from "next/font/google";
+import { Inter } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
+import { ThemeProvider } from "next-themes";
 import "./globals.css";
 
-const inter = Inter({subsets: ["latin"]});
-
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
     template: "%s | AI Will Builder",
     absolute: "AI Will Builder",
   },
-  description: "AI Will Builder is the essential tool for creating a will online. Create a will in minutes, with or without a lawyer.",
+  description:
+    "AI Will Builder is the essential tool for creating a will online. Create a will in minutes, with or without a lawyer.",
 };
 
 export default function RootLayout({
@@ -19,12 +21,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={inter.className}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className={inter.className}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
