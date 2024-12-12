@@ -6,7 +6,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -64,7 +63,6 @@ body {
   }
 }
 
-
 @layer base {
   * {
     @apply border-border;
@@ -72,4 +70,26 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* This is a media query that targets the print media type */
+/* @media print is a built-in CSS feature */
+@media print {
+  #willPreviewContent {
+    zoom: 1 !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 4rem;
+  }
+}
+
+#willPreviewContent {
+  font-family: Inter;
+}
+
+/* @page rule is also a built-in feature of CSS. */
+/* modify the layout of a printed page. It allows you to set specific properties for the page box, such as size and margins, when printing a document. */
+@page {
+  size: A4;
+  margin: 1cm;
 }

@@ -1,6 +1,11 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-const isPublicRoute = createRouteMatcher(["/", "/sign-in(.*)", "/sign-up(.*)"]); //means that the route will match /sign-in followed by any characters or nothing at all. For example, it will match /sign-in, /sign-in/extra, /sign-in123, etc.
+const isPublicRoute = createRouteMatcher([
+  "/",
+  "/sign-in(.*)",
+  "/sign-up(.*)",
+  "/api/stripe-webhook", // stripe webhook is a public route
+]); //means that the route will match /sign-in followed by any characters or nothing at all. For example, it will match /sign-in, /sign-in/extra, /sign-in123, etc.
 export default clerkMiddleware(async (auth, request) => {
   if (!isPublicRoute(request)) {
     await auth.protect();
