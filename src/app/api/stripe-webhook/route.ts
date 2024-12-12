@@ -54,8 +54,9 @@ async function handleSessionCompleted(session: Stripe.Checkout.Session) {
   if (!userId) {
     throw new Error("No userId in session metadata");
   }
-
-  (await clerkClient()).users.updateUserMetadata(userId, {
+  //add 2 await because we are calling 2 async functions
+  //make sure update 
+  await (await clerkClient()).users.updateUserMetadata(userId, {
     privateMetadata: {
       stripeCustomerId: session.customer as string,
     },
